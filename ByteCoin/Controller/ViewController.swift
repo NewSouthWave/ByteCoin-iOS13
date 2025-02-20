@@ -8,13 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UIPickerViewDataSource {
+    
+    @IBOutlet weak var bitcoinLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var currencyPicker: UIPickerView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        currencyPicker.dataSource = self
     }
 
-
+    // 피커뷰의 열 개수 설정
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // 행 개수 설정
+    let coinManager = CoinManager()
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return coinManager.currencyArray.count
+    }
+    
 }
 
